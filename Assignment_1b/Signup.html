@@ -1,0 +1,71 @@
+<html>
+  <head>
+    <style>
+      #register-form {
+        width: 500px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+      }
+
+      #register-form input[type="text"],
+      #register-form input[type="email"],
+      #register-form input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      #register-form input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      #register-form input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        function saveData(data) {
+          $.ajax({
+            type: "POST",
+            url: "https://jsonplaceholder.typicode.com/posts",
+            data: data,
+            success: function(response) {
+              localStorage.setItem("userData", JSON.stringify(response));
+            }
+          });
+        }
+
+        $("#register-form").submit(function(e) {
+          e.preventDefault();
+          var data = {
+            username: $("#username").val(),
+            email: $("#email").val(),
+            password: $("#password").val()
+          };
+
+          saveData(data);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <form id="register-form">
+      <input type="text" id="username" name="username" placeholder="Enter username">
+      <input type="email" id="email" name="email" placeholder="Enter email">
+      <input type="password" id="password" name="password" placeholder="Enter password">
+      <input type="submit" value="Submit">
+    </form>
+  </body>
+</html>

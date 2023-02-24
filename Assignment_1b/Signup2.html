@@ -1,0 +1,73 @@
+<!-- <html>
+  <head>
+    <style>
+      table {
+        width: 80%;
+        margin: 50px auto;
+        border-collapse: collapse;
+      }
+
+      th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #ddd;
+      }
+    </style>
+    <script>
+      window.onload = function() {
+        var userData = localStorage.getItem("userData");
+        if (userData) {
+          userData = JSON.parse(userData);
+
+          var table = "<table><tr><th>Username</th><th>Email</th><th>Password</th></tr>";
+          for (var i = 0; i < userData.length; i++) {
+            table += "<tr><td>" + userData[i].username + "</td><td>" + userData[i].email + "</td><td>" + userData[i].password + "</td></tr>";
+          }
+          table += "</table>";
+
+          document.getElementById("user-data").innerHTML = table;
+        } else {
+          document.getElementById("user-data").innerHTML = "No data found in local storage.";
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div id="user-data"></div>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #display-data {
+        width: 500px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+      }
+    </style>
+    <script>
+      window.onload = function() {
+        let data = localStorage.getItem("userData");
+
+        data = JSON.parse(data);
+
+        const displayData = document.querySelector("#display-data");
+
+        displayData.innerHTML = "Username: " + data.username + "<br>" +
+                                "Email: " + data.email + "<br>" +
+                                "Password: " + data.password;
+      };
+    </script>
+  </head>
+  <body>
+    <div id="display-data"></div>
+  </body>
+</html>

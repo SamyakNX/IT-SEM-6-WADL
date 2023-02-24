@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-
+nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Form</title>
+    <link rel="stylesheet" href="Payment.css">
+    
+</head>
+<body>
+    <div class="container">
+        <form method="POST">
+            <h1 class="main_heading">Payment Form</h1>
+            <h2>User Information</h2>
+            <p>Name: <input type="text" name="name" id="name" required placeholder="Samyak Jain"></p>
+            <fieldset>
+                <legend>Gender</legend>
+                <p>
+                    <input type="radio" name="gender" id="male" required> Male
+                    <br>
+                    <input type="radio" name="gender" id="female" required> Female
+                    <br>
+                    <input type="radio" name="gender" id="other" required> Rather Not Say
+                </p>
+            </fieldset>
+            <p>
+                Address: <textarea name="address" id="address" cols="100" rows="5" placeholder="Enter you address"></textarea>
+            </p>
+            <p>
+                Email: <input type="email" name="email" id="email" required placeholder="samyakjain0510@gmail.com">
+            </p>
+            <p>
+                Pincode: <input type="number" name="pincode" id="pincode" placeholder="123456">
+            </p>
+            <hr>
+            <h2>Payment Information</h2>
+            <p>
+                Card Type:
+                <select name="card_type" id="card_type">
+                    <option value="">---Select a Card Type---</option>
+                    <option value="visa">VISA</option>
+                    <option value="mastercard">Mastercard</option>
+                    <option value="rupay">Rupay</option>
+                </select>
+            </p>
+            <p>
+                Card Number: <input type="number" name="card_number" id="card_number" required placeholder="1111-2222-3333-4444">
+            </p>
+            <p>
+                Expiry Date: <input type="date" name="expiry_date" id="expiry_date" placeholder="dd/mm/yy">
+            </p>
+            <p>
+                CVV: <input type="password" name="cvv" id="cvv" placeholder="123">
+            </p>
+            <input type="button" value="Pay" onclick="submitForm()">
+        </form>
+    </div>
+    <script>
+    function submitForm(){
+
+        console.log("Hello");
+        var name = $('input[name=name]').val();
+        var address = $('textarea[name=address]').val();
+        var email = $('input[name=email]').val();
+        var pincode = $('input[name=pincode]').val();
+        var card_number = $('input[name=card_number]').val();
+        
+        var formData = 'name=' + name + '&address=' + address +'&email=' + email + '&pincode=' + pincode + '&card_number=' + card_number;
+        $.ajax({
+        type: "POST",
+        url: "output.php",
+        data: formData,
+        }).done(function (response) {
+        //$("#outputs").html(response);
+        var new_window = window.open(null, '','_blank');
+        new_window.document.write(response);
+        });
+        }
+    </script>
+</body>
+</html>
